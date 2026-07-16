@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Всероссийский футбольный союз</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        /* ЗАГОЛОВКИ */
+        @font-face {
+            font-family: 'Proletariat';
+            src: url('fonts/proletariat.eot');
+            src: url('fonts/proletariat.eot?#iefix') format('embedded-opentype'),
+                url('fonts/proletariat.woff2') format('woff2'),
+                url('fonts/proletariat.woff') format('woff'),
+                url('fonts/proletariat.ttf') format('truetype'),
+                url('fonts/proletariat.svg#proletariat') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* ОСНОВНОЙ */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <img src="images/logo_vfs.png" alt="Всероссийский футбольный союз">
+            </a>
+            <button class="burger" id="burger" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#/league/rfl">РФЛ</a></li>
+                    <li><a href="#/league/champ1">Дивизион-1</a></li>
+                    <li><a href="#/league/kingCup">Кубок Царя</a></li>
+                    <li><a href="#/league/cl">Кубок Наций</a></li>
+                    <li><a href="#/league/el">Кубок Претендентов</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-wrap container" id="app">
+        <!-- ДИНАМИЧЕСКИЙ КОНТЕНТ -->
+    </main>
+
+    <footer class="site-footer">
+        <p>© Всероссийский футбольный союз (Российская империя), 2026.</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,960 @@
+/* БАЗА */
+:root {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-card: #252525;
+  --bg-hover: #2c2c2c;
+  --text-primary: #e6e0d3;
+  --text-secondary: #b0a892;
+  --text-muted: #7a7365;
+  --accent-gold: #c7a35c;
+  --accent-gold-dark: #9e7e40;
+  --accent-red: #8b3a3a;
+  --accent-green: #3a5c3a;
+  --border-color: #3a3530;
+  --border-light: #4a443b;
+  --font-heading: "Proletariat", "Times New Roman", serif;
+  --font-body: "Inter", "Roboto", "Segoe UI", sans-serif;
+  --transition: 0.25s ease-in-out;
+  --radius: 8px;
+  --radius-lg: 0px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --max-width: 1280px;
+  --header-height: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--accent-gold);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover {
+  color: var(--accent-gold-dark);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 10;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+}
+
+/* КОНТЕЙНЕР */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 30px 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--accent-gold);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* НАВИГАЦИЯ */
+.site-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  height: 60px;
+  width: auto;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease,
+    filter 0.3s ease;
+}
+.logo:hover img {
+  transform: scale(0.95);
+  opacity: 0.85;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 28px;
+}
+.main-nav a {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-size: 0.9rem;
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+  transition:
+    border-color var(--transition),
+    color var(--transition);
+}
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--accent-gold);
+  border-bottom-color: var(--accent-gold);
+  text-decoration: none;
+}
+
+/* БУТЕРБРОД-МЕНЮ */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+}
+.burger span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: var(--accent-gold);
+  border-radius: 3px;
+  transition: 0.3s ease;
+}
+
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ХЛЕБББ */
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 15px 0 10px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.breadcrumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumbs a:hover {
+  color: var(--accent-gold);
+}
+.breadcrumbs .separator {
+  color: var(--text-muted);
+  user-select: none;
+}
+.breadcrumbs .current {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .breadcrumbs {
+    font-size: 0.8rem;
+    gap: 5px;
+  }
+}
+
+/* ТУРНИРНАЯ ТАБЛИЦА */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  background: var(--bg-card);
+}
+
+.tournament-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+  font-size: 0.95rem;
+}
+.tournament-table th,
+.tournament-table td {
+  padding: 14px 12px;
+  text-align: left;
+  vertical-align: middle;
+}
+.tournament-table thead th {
+  background: var(--bg-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+}
+.tournament-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background var(--transition);
+}
+.tournament-table tbody tr:hover {
+  background: var(--bg-hover);
+}
+.tournament-table .team-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+.team-logo-small {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.team-name {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.indicator.lc {
+  background: #3b82f6;
+} /* ЛЧ */
+.indicator.le {
+  background: #f59e0b;
+} /* ЛЕ */
+.indicator.relegation {
+  background: var(--accent-red);
+}
+.indicator.none {
+  background: transparent;
+  border: 1px solid var(--text-muted);
+}
+
+/* АДАПТИВ ПОД МОБ */
+@media (max-width: 768px) {
+  .tournament-table th,
+  .tournament-table td {
+    padding: 6px 4px;
+    font-size: 0.8rem;
+    vertical-align: middle;
+  }
+
+  .tournament-table td:first-child {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .indicator {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .team-logo-small {
+    width: 22px;
+    height: 22px;
+  }
+  .team-name {
+    font-size: 0.85rem;
+  }
+
+  .content-wrap {
+    padding-bottom: 40px;
+  }
+
+  .history-block {
+    margin-bottom: 20px;
+    padding: 20px 15px;
+  }
+
+  .club-hero {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    padding: 7px 14px;
+    font-size: 0.65rem;
+    letter-spacing: 0.4px;
+  }
+
+  h1.section-title {
+    font-size: 1.7rem;
+    margin-top: 25px;
+    white-space: normal;
+  }
+
+  .content-wrap {
+    padding-top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tournament-table th,
+  .tournament-table td {
+    padding: 6px 4px;
+    font-size: 0.7rem;
+  }
+  .team-logo-small {
+    width: 18px;
+    height: 18px;
+  }
+  .team-name {
+    font-size: 0.75rem;
+  }
+}
+
+/* РЕЗЫ МАТЧЕЙ */
+.match-list {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+.match-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+.match-item:last-child {
+  border-bottom: none;
+}
+.match-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  min-width: 130px;
+}
+.match-teams {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 200px;
+}
+.match-teams img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+.match-score {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 0 10px;
+  color: var(--accent-gold);
+}
+.match-tour {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 60px;
+  text-align: right;
+}
+
+/* ДРЕВО */
+.bracket-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  margin: 30px 0;
+}
+
+.bracket-round {
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+}
+.bracket-round h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--accent-gold);
+  font-size: 1.3rem;
+}
+
+.bracket-matches {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.bracket-match {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 12px 20px;
+  min-width: 260px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  position: relative;
+  transition:
+    transform var(--transition),
+    border-color var(--transition);
+}
+.bracket-match:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-gold);
+}
+.bracket-team {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+.bracket-team img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+.bracket-team .score {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--accent-gold);
+}
+.bracket-info {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 6px;
+}
+.bracket-connector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  position: relative;
+}
+.bracket-connector::before {
+  content: "";
+  width: 2px;
+  height: 100%;
+  background: var(--accent-gold);
+  opacity: 0.4;
+}
+
+/* СТРАНИЧКА КЛУБА */
+.club-hero {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.club-logo-large {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+.club-info {
+  flex: 1;
+}
+.club-name {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+.club-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.detail-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.detail-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.8;
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+
+/* АДАПТИВ */
+@media (max-width: 768px) {
+  .club-details {
+    gap: 8px 16px;
+  }
+  .detail-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .detail-item {
+    font-size: 0.9rem;
+  }
+}
+
+.sponsor-logo {
+  width: 100px;
+  height: auto;
+  margin-top: 12px;
+}
+
+.sponsor-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.sponsor-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.sponsor-logo {
+  width: 100px;
+  height: auto;
+}
+
+.sponsor-block .sponsor-label:only-child {
+  color: var(--accent-gold);
+  font-weight: 500;
+}
+
+.history-block {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+.history-block h3 {
+  margin-bottom: 15px;
+  color: var(--accent-gold);
+}
+.history-block p {
+  margin-bottom: 15px;
+  line-height: 1.8;
+}
+
+/* СТРАНИЧКА ТУРНИРА */
+.tournament-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.tournament-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.tournament-title {
+  font-size: 2.2rem;
+}
+.tournament-meta {
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+/* КНОПОЧКИ ССЫЛОЧКИ */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: var(--accent-gold);
+  color: #121212;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.btn:hover {
+  background: var(--accent-gold-dark);
+  color: #121212;
+  text-decoration: none;
+}
+
+.league-preview {
+  margin-bottom: 45px;
+}
+
+.cups-links {
+  margin-bottom: 45px;
+}
+
+@media (max-width: 768px) {
+  .league-preview,
+  .cups-links {
+    margin-bottom: 45px;
+  }
+}
+
+/* ПОГРЕБ */
+.site-footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ЕЩЁ ЕЩЁ ОДИН АДАПТИВ */
+@media (max-width: 992px) {
+  .main-nav ul {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
+  .main-nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background: var(--bg-secondary);
+    border-bottom: 2px solid var(--accent-gold);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    z-index: 99;
+  }
+  .main-nav.active {
+    max-height: 400px;
+  }
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 15px 20px;
+  }
+  .main-nav ul li {
+    border-bottom: 1px solid var(--border-color);
+  }
+  .main-nav ul li:last-child {
+    border-bottom: none;
+  }
+  .main-nav a {
+    display: block;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+
+  .tournament-table {
+    min-width: auto;
+  }
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  .bracket-matches {
+    flex-direction: column;
+    align-items: center;
+  }
+  .bracket-match {
+    width: 90%;
+    min-width: auto;
+  }
+  .club-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  .match-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .match-date {
+    min-width: auto;
+  }
+
+  @media (max-width: 768px) {
+    .tournament-header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .tournament-header .tournament-logo {
+      margin: 0 auto;
+    }
+    .tournament-header .tournament-title,
+    .tournament-header .tournament-meta {
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .club-name {
+    font-size: 1.8rem;
+  }
+  .tournament-title {
+    font-size: 1.5rem;
+  }
+  .container {
+    padding: 0 12px;
+  }
+}
+
+/* АНИМАШКИ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gold-dark);
+  border-radius: 4px;
+}
+
+.indicator.promotion {
+  background: #10b981;
+}
+
+/* ДРЕВО БЕЗ СДВИГА */
+.bracket-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+.tree {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: max-content;
+  margin: 20px 0;
+  padding-bottom: 20px;
+}
+
+.tree-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.tree-children {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  position: relative;
+}
+
+.tree-children::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: calc(100% - 16px);
+  border-top: 2px solid var(--accent-gold);
+  opacity: 0.5;
+  transform: translateX(-50%);
+}
+
+.tree-node:not(:first-child) .tree-match::after {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: 2px;
+  height: 16px;
+  background: var(--accent-gold);
+  opacity: 0.5;
+}
+
+.tree-match {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  min-width: 180px;
+  max-width: 220px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.tree-match:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+}
+
+.tree-team {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+.tree-team img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+.tree-team:hover {
+  color: var(--accent-gold);
+}
+
+.tree-score {
+  font-weight: 700;
+  color: var(--accent-gold);
+  font-size: 1rem;
+}
+
+.tree-round {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .tree-children {
+    gap: 10px;
+  }
+  .tree-match {
+    padding: 6px 10px;
+    min-width: 150px;
+    max-width: 180px;
+  }
+  .tree-team {
+    font-size: 0.8rem;
+  }
+  .tree-team img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Отступ для расположения матча */
+.match-away {
+  margin-left: 150px;
+}
+
+@media (max-width: 768px) {
+  .match-away {
+    margin-left: 0;
+  }
+}
